@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>connexion</title>
 </head>
 <body>
-	<form action="login.php" method="post">
+	<form action="../login.php" method="POST">
 		<table>
 			<tr>
 				<td><label>login</label></td>
@@ -18,10 +18,18 @@
 				<td><input type="text" name="txtpassword"></td>
 			</tr>
 			<tr>
-				<td> moi</td>
+				<td><a href="formulaireClient.jsp">enregistrer</a></td>
 				<td><input type="submit" value="login"></td>
 			</tr>
+			
 		</table>
 	</form>
+	<p>
+		<%
+			String log=(String)request.getAttribute("txtlogin");
+			if(log!=null)
+				out.println(log);
+		%>
+	</p>
 </body>
 </html>
