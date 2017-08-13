@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,14 +11,14 @@ import Model.ModelClient;
 /**
  * Servlet implementation class login
  */
-@WebServlet("/login")
-public class login extends HttpServlet {
+//@WebServlet("/login")
+public class CreateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**CreateUser
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public CreateUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +28,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		this.doPost(request, response);
+
 		//this.getServletContext().getRequestDispatcher("/vues/dashboardClient.jsp").forward(request, response);
 		//request.getRequestDispatcher("/vues/login.jsp").forward(request, response);
 	}
@@ -38,19 +37,19 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String login =(String)request.getParameter("txtlogin");
-		String password =(String)request.getParameter("txtpassword");
-		String text = "echec login";
+		String nom =(String)request.getParameter("nom");
+		String prenom =(String)request.getParameter("prenom");
+		String adresse =(String)request.getParameter("adresse");
+		String tel =(String)request.getParameter("tel");
+		String login =(String)request.getParameter("login");
+		String password =(String)request.getParameter("password");
+		String text = "false";
 		ModelClient m_client = new ModelClient();
-		if(m_client.log(login, password)) {
-			request.setAttribute("model", m_client);
-			this.getServletContext().getRequestDispatcher("/vues/dashboardClient.jsp").forward(request, response);
-		}
-		else {
-			request.setAttribute("rsp", text);
-			this.getServletContext().getRequestDispatcher("/vues/login.jsp").forward(request, response);
-		}
+		if(m_client.createCli(nom, prenom, adresse, tel, login, password))
+			text="true";
+	    response.setContentType("text/plain");  
+	    response.setCharacterEncoding("UTF-8"); 
+	    response.getWriter().write(text); 
 	}
 
 }

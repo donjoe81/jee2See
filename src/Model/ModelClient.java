@@ -10,7 +10,7 @@ import Dao.DaoClient;
 public class ModelClient {
 	private String nom=null;
 	private String prenom=null;
-	private int id=0;
+	private int id;
 	private List<Reservation> reservations;
 	AbstractDAOFactory fact = null;
 	
@@ -61,18 +61,22 @@ public class ModelClient {
 			if(cli!=null){
 				this.nom=cli.getNom_client();
 				this.prenom=cli.getPrenom_client();
-				this.id=cli.getId_cli();
+				this.setId(cli.getId_cli());
 				res=true;		
 			}
 		}
 		return res;
 	}
-	public void findReservation(){
-		if(id!=0){
-			fact = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-			DaoClient dclient = (DaoClient)fact.getDaoClient();
-			this.reservations = dclient.rdvClient(id);
-		}
+	public void findReservation(int id){
+		fact = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+		DaoClient dclient = (DaoClient)fact.getDaoClient();
+		this.reservations = dclient.rdvClient(id);
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

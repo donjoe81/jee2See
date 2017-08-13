@@ -19,7 +19,7 @@ public class connecBdd {
  
 		String hote = "char-oracle11.condorcet.be";//localhost";//
 	    String URL = "jdbc:oracle:thin:@"+hote+":1521:xe";
-	    String USER = "facsys";//"exa5"; 
+	    String USER = "exa5";//"facsys";// 
 	    String PASSWD = "root1"; 
  
 	    try {
