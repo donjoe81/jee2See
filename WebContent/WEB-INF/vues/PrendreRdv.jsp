@@ -32,7 +32,9 @@
 					<td><input type="radio" name="idresto" value="${resto.id_restaurant}" /></td>
 				</tr>
 			</c:forEach>
-			<tr>
+		</table>
+		<table>
+						<tr>
 				<td>nombre de place :</td>
 				<td><input type="text" name="nbrPlace" value=""/></td>
 			</tr>

@@ -66,6 +66,7 @@ public class ModelRestaurant {
 			this.setNom(resto.getNom_restaurant());
 			this.setAdresse(resto.getAdresse_restaurant());
 			this.setTel(resto.getTel_restaurant());
+			findReservations(this.id);
 			res=true;
 		}
 		return res;

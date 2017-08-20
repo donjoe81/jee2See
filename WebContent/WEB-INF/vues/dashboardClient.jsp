@@ -7,16 +7,21 @@
 <title>Accieul</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/update.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
 </head>
 <body>	
-	<div>
-		<a href="prendre-rendez-vous">prendre un rendez-vous</a><br/>
-		<a href="" id="a_rdv">mes rendez-vous</a><br/>
+	<div  class="container">
+		<table class="table">
+			<tr>
+				<td><a href="prendre-rendez-vous">prendre un rendez-vous</a></td>
+				<!-- <td><a href="" id="a_rdv">mes rendez-vous</a></td> -->
+			</tr>
+		</table>
 	</div> 
 	
-	<div>
+	<div class="container">
 
-<!-- 	<table>
+		<!-- 	<table>
 		<%
 			ModelClient m_client= (ModelClient)request.getAttribute("model");
 			out.println(m_client.getNom()+" "+m_client.getPrenom());
@@ -27,10 +32,10 @@
 		
 		<c:forEach items="${m_client.reservations}" var="reser">
 			<div style="margin:20px">
-				<label>nom restaurant : </label>${reser.restaurant.nom_restaurant}<br/>
-				<label>adresse restaurant : </label>${reser.restaurant.adresse_restaurant}<br/>
-				<label>tel restaurant : </label>${reser.restaurant.tel_restaurant}<br/>
-				<label>adresse restaurant : </label>${reser.date_reservation}<br/>
+				<label>nom restaurant : </label> ${reser.restaurant.nom_restaurant}<br/>
+				<label>adresse restaurant : </label> ${reser.restaurant.adresse_restaurant}<br/>
+				<label>tel restaurant : </label> ${reser.restaurant.tel_restaurant}<br/>
+				<label>adresse restaurant : </label> ${reser.date_reservation}<br/>
 			</div>
 		</c:forEach>
 	</div>
