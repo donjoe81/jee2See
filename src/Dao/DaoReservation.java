@@ -36,7 +36,7 @@ public class DaoReservation extends IDao<Reservation>{
 				res = true;
 		}
 		catch (Exception e){
-			e.printStackTrace();  
+			System.out.println(e.getMessage());
 		}
 		return res;
 	}
@@ -102,3 +102,5 @@ public class DaoReservation extends IDao<Reservation>{
 			return true;
 	}
 }
+
+

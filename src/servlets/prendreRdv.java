@@ -1,23 +1,28 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Class.Restaurant;
+import Model.ModelRestaurant;
 
 /**
- * Servlet implementation class login
+ * Servlet implementation class prendreRdv
  */
-//@WebServlet("/login")
-public class CreateUser extends HttpServlet {
+@WebServlet("/prendreRdv")
+public class prendreRdv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**CreateUser
+    /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUser() {
+    public prendreRdv() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,23 +31,17 @@ public class CreateUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String compte = (String)request.getParameter("compte");
-		if(compte.equals("client"))
-			this.getServletContext().getRequestDispatcher("/WEB-INF/vues/formulaireClient.jsp").forward(request, response);
-		else if(compte.equals("restaurant"))
-			this.getServletContext().getRequestDispatcher("/WEB-INF/vues/formulaireRestaurant.jsp").forward(request, response);
-		//request.getRequestDispatcher("/vues/login.jsp").forward(request, response);
+		List<Restaurant> listRestos = ModelRestaurant.findAll();
+		request.setAttribute("restaurants", listRestos);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/vues/PrendreRdv.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		/*response.setContentType("text/plain");  
-	    response.setCharacterEncoding("UTF-8"); 
-	    response.getWriter().write(text);*/
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

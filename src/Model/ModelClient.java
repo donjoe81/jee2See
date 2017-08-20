@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Class.Client;
@@ -11,8 +12,8 @@ public class ModelClient {
 	private String nom=null;
 	private String prenom=null;
 	private int id;
-	private List<Reservation> reservations;
-	AbstractDAOFactory fact = null;
+	private List<Reservation> reservations=new ArrayList<Reservation>();
+	private AbstractDAOFactory fact = null;
 	
 	public List<Reservation> getReservations() {
 		return reservations;
@@ -33,6 +34,14 @@ public class ModelClient {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 
 	public boolean createCli(String nom,String prenom,String adresse,String tel,String login,String pass){
@@ -62,6 +71,7 @@ public class ModelClient {
 				this.nom=cli.getNom_client();
 				this.prenom=cli.getPrenom_client();
 				this.setId(cli.getId_cli());
+				findReservation(this.id);
 				res=true;		
 			}
 		}
@@ -71,12 +81,6 @@ public class ModelClient {
 		fact = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 		DaoClient dclient = (DaoClient)fact.getDaoClient();
 		this.reservations = dclient.rdvClient(id);
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 }

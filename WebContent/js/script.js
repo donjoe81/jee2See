@@ -1,10 +1,16 @@
 window.onload = init;
 
 function init(){
-	$("btnvalider").onclick=save;
-	
+	hide($("formChoixCompte"));
+	show($("formLogin"));
+	$("btnNewCompte").onclick=affiche;
 }
 
+function affiche(){
+	show($("formChoixCompte"));
+	hide($("formLogin"));
+}
+/*
 function valider(){
 	var param="";
 	if(isanumber($("txttel").value)){
@@ -20,22 +26,23 @@ function save(){
 		xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-					callBackSelectMap(xhr.responseText);
+					callBackCreateUser(xhr.responseText);
 				}
 			}
 		}
-		xhr.open("POST","../create.php?"+param,true);
-		xhr.send(null);
+		xhr.open("POST","nouvel-utilisateur",true);
+		xhr.send(param);
 	}
 	else
 		alert("tous les champs (*) sont obligatoire");
 }
 
-function callBackSelectMap(rsp){
-	if(rsp="true"){
+function callBackCreateUser(rsp){
+	alert(rsp);
+	/*if(rsp="true"){
 		alert('compté crée avec succes');
 		window.location.href="http://localhost:9090/reservation/vues/login.jsp";
 	}
 	else
 		alert("erreur survenu lors du traitement de votre demande, veillez reessayer plus tard");
-}
+}*/

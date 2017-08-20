@@ -37,7 +37,6 @@ public class DaoRestaurant extends IDao<Restaurant>{
 				res.setLogin_restaurant(login);
 				res.setPass_restaurant(password);
 				res.setAdresse_restaurant(result.getString(7));
-				
 			}
 		}
 		catch (Exception e){
@@ -82,17 +81,45 @@ public class DaoRestaurant extends IDao<Restaurant>{
 				res=new Restaurant();
 				res.setId_rstaurant(result.getInt(1));
 				res.setNom_restaurant(result.getString(2));
-				res.setTel_restaurant(result.getString(3));
-				res.setEmail_restaurant(result.getString(4));
-				res.setLogin_restaurant(result.getString(5));
-				res.setPass_restaurant(result.getString(6));
-				res.setAdresse_restaurant(result.getString(7));
+				res.setTel_restaurant(result.getString(4));
+				res.setEmail_restaurant(result.getString(5));
+				res.setAdresse_restaurant(result.getString(3));
 			}
 		}
 		catch (Exception e){
 			e.printStackTrace();  
 		}
 		return res;
+	}
+	
+	/***********************************************************************************/
+	
+	/***********************************************************************************/
+	
+	public List<Restaurant> findAll() {
+		
+		List<Restaurant> lisResto=new ArrayList<Restaurant>();
+		try{
+			String sql = "{call PKG_Restaurant.findAll(?)}"; 
+			CallableStatement call = connect.prepareCall(sql); 		
+			call.registerOutParameter(1, OracleTypes.CURSOR); 
+			call.execute();
+			ResultSet  result = (ResultSet)call.getObject(1);
+			while(result.next()){
+				Restaurant res = new Restaurant();
+				res=new Restaurant();
+				res.setId_rstaurant(result.getInt(1));
+				res.setNom_restaurant(result.getString(2));
+				res.setTel_restaurant(result.getString(4));
+				res.setEmail_restaurant(result.getString(5));
+				res.setAdresse_restaurant(result.getString(3));
+				lisResto.add(res);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();  
+		}
+		return lisResto;
 	}
 
 	@Override
@@ -107,7 +134,7 @@ public class DaoRestaurant extends IDao<Restaurant>{
 		return false;
 	}
 	
-	public List<Reservation> reservationsRestaurant(Restaurant resto){
+	public List<Reservation> reservationsRestaurant(int id){
 		List<Reservation> list = new ArrayList<Reservation>();
 		AbstractDAOFactory fact = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 		DaoClient dclient = (DaoClient)fact.getDaoClient();
@@ -118,7 +145,7 @@ public class DaoRestaurant extends IDao<Restaurant>{
 			call.registerOutParameter(1, Types.INTEGER);
 			call.registerOutParameter(2, OracleTypes.CURSOR); 
 			
-			call.setInt(1, resto.getId_restaurant());
+			call.setInt(1, id);
 			call.execute();
 			ResultSet  result = (ResultSet)call.getObject(2);
 			while(result.next()){
